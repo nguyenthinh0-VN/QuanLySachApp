@@ -79,7 +79,7 @@ public class MenuCUI {
 
 		private void themSach() {
 			// TODO Auto-generated method stub
-			//đối tượng MenuCUI gửi thông điệp cho 
+			//đối tượng MenuCUI gửi thông điệp cho ThemSachInputCUI
 			//đối tượng ????UI để người dùng nhập
 			//thông tin của sách
 			themSachInputCUI.nhapThongTinSach();

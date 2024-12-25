@@ -16,7 +16,7 @@ public class InDSSDAOFile implements InDAO {
     public ArrayList<Sach> getDSSach() {
         FileInputStream fileStream = null;
         ObjectInputStream oIS = null;
-        ArrayList<Sach> dsSach = null;
+        ArrayList<Sach> getDSSAll = null;
 
         try {
             //Mo duong truyen
@@ -24,7 +24,7 @@ public class InDSSDAOFile implements InDAO {
             oIS = new ObjectInputStream(fileStream);
 
             //Doc du lieu
-            dsSach = (ArrayList<Sach>) oIS.readObject();
+            getDSSAll = (ArrayList<Sach>) oIS.readObject();
 
             //Dong duong truyen
             oIS.close();
@@ -37,6 +37,6 @@ public class InDSSDAOFile implements InDAO {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return dsSach;
+        return getDSSAll;
     }
 }

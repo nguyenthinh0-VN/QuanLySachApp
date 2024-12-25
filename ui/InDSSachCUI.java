@@ -16,12 +16,12 @@ public class InDSSachCUI {
         this.screenOutput = screenOutput;
     }
 
-    public void inDSSach(ArrayList<Sach> dssach) {
+    public void inDSSach(ArrayList<Sach> dsSach) {
         screenOutput.printf("%-10s %-12s %-20s %-12s %-15s %-14s %-17s%n",
                 "Mã sách", "Ngày Nhập", "Đơn giá", "Số lượng", "Nhà Xuất bản", "Tình Trạng", "Thuế");
         screenOutput.println("-------------------------------------------------------------------------------------------------");
 
-        for (Sach sach : dssach) {
+        for (Sach sach : dsSach) {
             String ngayNhapFormatted = dateFormat.format(sach.getNgayNhap());
             String tinhTrang = "không";
             String thue = "không";
