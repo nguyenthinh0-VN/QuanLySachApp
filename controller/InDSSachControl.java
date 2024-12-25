@@ -16,9 +16,6 @@ public class InDSSachControl {
         this.inDSSachCUI = inDSSachCUI;
     }
 
-    public void set(InDAO inDAO) {
-        this.inDAO = inDAO;
-    }
 
     public  void inDSSach(){
         ArrayList<Sach> dsSach = inDAO.getDSSach();

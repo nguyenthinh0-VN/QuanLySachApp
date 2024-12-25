@@ -5,55 +5,49 @@ import java.util.Scanner;
 
 import controller.InDSSachControl;
 import controller.ThemMoiSachControl;
+import controller.XoaSachControl;
 import dao.InDSSDAOFile;
 import dao.ThemSachMoiDAOFile;
+import dao.XoaSachDAOFile;
 import ui.*;
 
 public class AppQLS {
 
-	public static void main(String[] args) {
-		//sử dụng Class MenuCUI
-				PrintWriter pWriterRemote = new PrintWriter(System.out, true);
-				Scanner scannerRemote = new Scanner(System.in);
-				ValidCUI.init(pWriterRemote, scannerRemote);
-				InDSSachCUI inDSSachCUIRemote = new InDSSachCUI(pWriterRemote);
-				//DAO
-				
-				ThemSachMoiDAOFile themSachMoiDAOFile = new 
-						ThemSachMoiDAOFile("Sach.txt");
-				
-				
-				ThongBaoThemSachCUI tbThemSachCUIRemote = 
-						new ThongBaoThemSachCUI(pWriterRemote);
+    public static void main(String[] args) {
+        // Initialize PrintWriter and Scanner
+        PrintWriter pWriterRemote = new PrintWriter(System.out, true);
+        Scanner scannerRemote = new Scanner(System.in);
+        ValidCUI.init(pWriterRemote, scannerRemote);
 
-				InDSSDAOFile inDSSVDAOFileRemote = new InDSSDAOFile("Sach.txt");
+        // Initialize UI components
+        InDSSachCUI inDSSachCUIRemote = new InDSSachCUI(pWriterRemote);
+        XoaSachCUI xoaSachCUIRemote = new XoaSachCUI(pWriterRemote);
 
+        // Initialize DAO components
+        ThemSachMoiDAOFile themSachMoiDAOFile = new ThemSachMoiDAOFile("Sach.txt");
+        InDSSDAOFile inDSSVDAOFileRemote = new InDSSDAOFile("Sach.txt");
+		XoaSachDAOFile xoaSachDAOFileRemote = new XoaSachDAOFile("Sach.txt");
 
-				
-				//Control
-				ThemMoiSachControl themMoiSachControlRemote = new ThemMoiSachControl(themSachMoiDAOFile);
-				themMoiSachControlRemote.setThemSachDAOFile(themSachMoiDAOFile);;
-				themMoiSachControlRemote.setTbThemSachCUI(tbThemSachCUIRemote);
+        // Initialize Control components
+        ThemMoiSachControl themMoiSachControlRemote = new ThemMoiSachControl(themSachMoiDAOFile);
+        themMoiSachControlRemote.setThemSachDAOFile(themSachMoiDAOFile);
+        themMoiSachControlRemote.setTbThemSachCUI(new ThongBaoThemSachCUI(pWriterRemote));
 
-					//InDSSachControl
-					InDSSachControl inDSSachControlRemote = new InDSSachControl(inDSSVDAOFileRemote, inDSSachCUIRemote);
-					inDSSachControlRemote.set(inDSSVDAOFileRemote);
+        InDSSachControl inDSSachControlRemote = new InDSSachControl(inDSSVDAOFileRemote, inDSSachCUIRemote);
+//        inDSSachControlRemote.set(inDSSVDAOFileRemote);
 
 
-				//CUI
-				ThemSachInputCUI themMoiSachCUIRemote = new 
-						ThemSachInputCUI(pWriterRemote, scannerRemote,themMoiSachControlRemote);
+        XoaSachControl xoaSachControlRemote = new XoaSachControl(xoaSachDAOFileRemote, xoaSachCUIRemote);
+//		xoaSachControlRemote.set(xoaSachDAOFileRemote);
 
 
-				MenuCUI menuCUIRemote = new MenuCUI(pWriterRemote, 
-						scannerRemote, themMoiSachCUIRemote);
+        // Initialize MenuCUI and set controls
+        ThemSachInputCUI themMoiSachCUIRemote = new ThemSachInputCUI(pWriterRemote, scannerRemote, themMoiSachControlRemote);
+        MenuCUI menuCUIRemote = new MenuCUI(pWriterRemote, scannerRemote, themMoiSachCUIRemote);
+        menuCUIRemote.setInDSSachControl(inDSSachControlRemote);
+        menuCUIRemote.setXoaSachControl(xoaSachControlRemote);
 
-					menuCUIRemote.setInDSSachControl(inDSSachControlRemote);
-				
-				//gửi thông điệp
-				menuCUIRemote.controlLoop();
-				
-
-	}
-
+        // Start the menu control loop
+        menuCUIRemote.controlLoop();
+    }
 }
