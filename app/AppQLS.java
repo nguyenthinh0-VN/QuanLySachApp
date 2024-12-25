@@ -35,8 +35,9 @@ public class AppQLS {
 				themMoiSachControlRemote.setThemSachDAOFile(themSachMoiDAOFile);;
 				themMoiSachControlRemote.setTbThemSachCUI(tbThemSachCUIRemote);
 
-				InDSSachControl inDSSachControlRemote = new InDSSachControl(inDSSVDAOFileRemote, inDSSachCUIRemote);
-				inDSSachControlRemote.set(inDSSVDAOFileRemote);
+					//InDSSachControl
+					InDSSachControl inDSSachControlRemote = new InDSSachControl(inDSSVDAOFileRemote, inDSSachCUIRemote);
+					inDSSachControlRemote.set(inDSSVDAOFileRemote);
 
 
 				//CUI
@@ -47,7 +48,7 @@ public class AppQLS {
 				MenuCUI menuCUIRemote = new MenuCUI(pWriterRemote, 
 						scannerRemote, themMoiSachCUIRemote);
 
-				menuCUIRemote.setInDSSachControl(inDSSachControlRemote);
+					menuCUIRemote.setInDSSachControl(inDSSachControlRemote);
 				
 				//gửi thông điệp
 				menuCUIRemote.controlLoop();
